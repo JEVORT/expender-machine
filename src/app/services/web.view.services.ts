@@ -25,7 +25,6 @@ export class ViewWeb {
     table.appendChild(tableHead);
 
     let tableBody = document.createElement("tbody");
-    //let tableBody = document.getElementById("table_products_body");
     tableBody.classList.add("table_products_body");
     tableBody.setAttribute("id", "table_products_body");
 
@@ -57,10 +56,6 @@ export class ViewWeb {
       </div>`
       container?.appendChild(divcontainer);
     });
-  }
-
-  pago(id:number){
-    alert(id)
   }
 }
 
