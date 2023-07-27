@@ -47,7 +47,6 @@ export class ViewWeb {
     products.forEach(product => {
       let divcontainer = document.createElement("div");
       divcontainer.classList.add('Card');
-
       divcontainer.innerHTML = `
       <div class="card-container" id="${product.id}">
         <div class="card-imgcontent">
@@ -58,6 +57,10 @@ export class ViewWeb {
       </div>`
       container?.appendChild(divcontainer);
     });
+  }
+
+  pago(id:number){
+    alert(id)
   }
 }
 
