@@ -1,0 +1,25 @@
+{
+  "name": "expender",
+  "version": "1.0.0",
+  "description": "Prueba 3",
+  "main": "./dist/console/index.js",
+  "scripts": {
+    "start:console": "tsc && node dist/console/index.js",
+    "start:web": "webpack",
+    "start": "webpack-dev-server --open"
+  },
+  "author": "Juan Elias Vergara <jevort@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.3.3",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "scanf": "^1.1.2",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.4.4",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
