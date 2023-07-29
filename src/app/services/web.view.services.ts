@@ -37,7 +37,8 @@ export class ViewWeb {
   }
 
   payProduct(product: product) {
-    let modtitle = document.getElementById("ModaTitle")!.innerHTML=`${product.Description}`;
+    let modtitle = document.getElementById("ModaTitle");
+    modtitle!.innerHTML=`${product.Description}`;
     let container = document.getElementById("modal-body");
     let divcontainer = document.createElement("div");
     let delettediv = container?.querySelector("div");
@@ -52,6 +53,9 @@ export class ViewWeb {
         </div>`
     container?.appendChild(divcontainer);
   }
+  denomynationPay(){
+    
+  };
 
 }
 
