@@ -38,7 +38,7 @@ export class ViewWeb {
 
   payProduct(product: product) {
     let modtitle = document.getElementById("ModaTitle")!.innerHTML=`${product.Description}`;
-    let container = document.getElementById("modal-body")
+    let container = document.getElementById("modal-body");
     let divcontainer = document.createElement("div");
     let delettediv = container?.querySelector("div");
     if (delettediv != undefined) { container?.removeChild(delettediv); }
