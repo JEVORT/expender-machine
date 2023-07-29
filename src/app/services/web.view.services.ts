@@ -1,5 +1,6 @@
 import { product } from './../domain/entities/entity';
 import { IDataBase } from "../domain/interfaces/interface.repository";
+import { Denominacion } from '../common/constans/denominations.money';
 
 export class ViewWeb {
 
@@ -50,11 +51,24 @@ export class ViewWeb {
         <div class="card-Pay-body">
           <h5 class="card-title">${product.Description}</h5>
           <p class="card-text">${product.Price}</p>
+          <div id="divMoneyContent" class="divMoneyContent">
+
+          </div>
         </div>`
     container?.appendChild(divcontainer);
+    this.denomynationPay();
   }
   denomynationPay(){
-    
+    let divMoneyContent = document.getElementById("divMoneyContent");
+    Denominacion.forEach((ticket) => {
+      let divMoneyItem = document.createElement("div");
+      divMoneyItem.setAttribute("id",`${ticket}`);
+      divMoneyItem.classList.add("divMoneyItem");
+      divMoneyItem.innerHTML= `
+      <p>${ticket}</p>
+      `;
+      divMoneyContent?.appendChild(divMoneyItem);
+    });
   };
 
 }
