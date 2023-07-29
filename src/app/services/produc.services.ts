@@ -39,6 +39,4 @@ export class ProducServices implements IDataBase<product> {
     productList.splice(index, 1);
     return true;
   }
-
-  
 }
