@@ -21,7 +21,9 @@ export class ViewWeb {
         <div class="card-body">
           <h5 class="card-title">${product.Description}</h5>
           <p class="card-text">${product.Price}</p>
-          <a id="${product.id}" href="#" class="btn btn-primary">Go somewhere</a>
+          <button id="${product.id}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPay">
+            Comprar
+          </button>
         </div>
       </div>`
       container?.appendChild(divcontainer);
@@ -35,7 +37,19 @@ export class ViewWeb {
   }
 
   pago(product: product) {
-    console.log(product)
+    let container = document.getElementById("modal-body")
+    let divcontainer = document.createElement("div");
+    let delettediv = container?.querySelector("div");
+    if(delettediv != undefined){container?.removeChild(delettediv);}
+    container?.innerHTML!="";
+    divcontainer.classList.add('CardPay');
+    divcontainer.innerHTML = `     
+        <img src="${product.imgUrl}" class="card-img-top" alt="Img Produc">
+        <div class="card-Pay-body">
+          <h5 class="card-title">${product.Description}</h5>
+          <p class="card-text">${product.Price}</p>
+        </div>`
+    container?.appendChild(divcontainer);
   }
 
 }
