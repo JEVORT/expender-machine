@@ -12,11 +12,12 @@ export class ViewWeb {
   FlexContent() {
     let container = document.getElementById("Card-containerFlex")
     let products = this.producservices.ReadAll();
+
     products.forEach(product => {
       let divcontainer = document.createElement("div");
       divcontainer.classList.add('Card');
       divcontainer.innerHTML = `     
-      <div class="card" style="width: 18rem;">
+      <div class="card">
         <img src="${product.imgUrl}" class="card-img-top" alt="Img Produc">
         <div class="card-body">
           <h5 class="card-title">${product.Description}</h5>
@@ -30,12 +31,13 @@ export class ViewWeb {
       let btnPay = document.getElementById(`${product.id}`)
       btnPay!.addEventListener('click', (e) => {
         e.preventDefault();
-        this.pago(product);
+        this.payProduct(product);
       })
     });
   }
 
-  pago(product: product) {
+  payProduct(product: product) {
+    let modtitle = document.getElementById("ModaTitle")!.innerHTML=`${product.Description}`;
     let container = document.getElementById("modal-body")
     let divcontainer = document.createElement("div");
     let delettediv = container?.querySelector("div");
