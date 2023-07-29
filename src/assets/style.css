@@ -66,6 +66,11 @@ body {
 }
 
 .divMoneyItem{
-    width: 80px;
-    background-color: rgba(4, 81, 197, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    background-color: rgba(7, 23, 255, 0.856);
+    color: rgb(245, 245, 245);
+    border-radius: 20px;
 }
