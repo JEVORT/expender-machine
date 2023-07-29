@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/web.index.ts',
   output: {
     path: path.resolve(__dirname, 'dist/web'),
-    filename: 'boundle.js',
+    filename: 'main.js',
   },
   plugins: [
     new HtmlWebpackPlugin({

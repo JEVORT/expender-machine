@@ -1,4 +1,4 @@
-import { product } from "../domain/entities/entity";
+import { product } from './../domain/entities/entity';
 import { IDataBase } from "../domain/interfaces/interface.repository";
 
 export class ViewWeb {
@@ -10,7 +10,18 @@ export class ViewWeb {
   }
 
   tableContent() {
-    let container = document.getElementById("Card-container")
+    let btnflex = document.getElementById("flex");
+    let btntable = document.getElementById("table");
+
+    btnflex?.addEventListener('click', () => {
+      this.selectView("flex");
+    })
+
+    btntable?.addEventListener('click', () => {
+      this.selectView("table");
+    })
+
+    let container = document.getElementById("Card-containerTable")
     let table = document.createElement("table");
     table.classList.add("table", "table-hover", "table-dark", "table_products")
     table.setAttribute("id", "ProductsTable");
@@ -41,21 +52,50 @@ export class ViewWeb {
   }
 
   FlexContent() {
-    let container = document.getElementById("Card-container")
+    let container = document.getElementById("Card-containerFlex")
     let products = this.producservices.ReadAll();
     products.forEach(product => {
       let divcontainer = document.createElement("div");
       divcontainer.classList.add('Card');
-      divcontainer.innerHTML = `
-      <div class="card-container" id="${product.id}">
-        <div class="card-imgcontent">
-          <img class="card-img" src="${product.imgUrl}" alt="img Produc">
+      divcontainer.innerHTML = `     
+      <div class="card" style="width: 18rem;">
+        <img src="${product.imgUrl}" class="card-img-top" alt="Img Produc">
+        <div class="card-body">
+          <h5 class="card-title">${product.Description}</h5>
+          <p class="card-text">${product.Price}</p>
+          <a id="${product.id}" href="#" class="btn btn-primary">Go somewhere</a>
         </div>
-        <p class="Pdescription">${product.Description}</p>
-        <p class="Pprice">$${product.Price}</p>
       </div>`
       container?.appendChild(divcontainer);
+      let btnPay = document.getElementById(`${product.id}`)
+      btnPay!.addEventListener('click', (e)=>{
+        e.preventDefault();
+        this.pago(product);
+      })
+
     });
   }
+
+  selectView(view: string) {
+
+    let contendTable = document.getElementById("Card-containerTable");
+    let contendFlex = document.getElementById("Card-containerFlex");
+    console.log(contendTable);
+    if (view == "flex") {
+      console.log("flex");
+      console.log(view)
+      contendFlex!.style.display = "flex";
+      contendTable!.style.display = "none";
+    } else {
+      console.log("table");
+      contendFlex!.style.display = "none";
+      contendTable!.style.display = "flex";
+    }
+  }
+
+  pago(product:product){
+    console.log(product)
+  }
+
 }
 

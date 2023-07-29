@@ -6,6 +6,6 @@ import "./assets/style.css";
 const viewWebServices = new ViewWeb(new ProducServices);
 
 window.onload = function execute() {
-    //viewWebServices.tableContent();
+    viewWebServices.tableContent();
     viewWebServices.FlexContent();
 };
