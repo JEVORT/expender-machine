@@ -25,4 +25,8 @@ export class ProductUtils {
     scanf("%s");
     console.clear();
   }
+
+  validatePay(moneyEntered:number, price:number):boolean{
+    return moneyEntered>=price;
+  }
 }

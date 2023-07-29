@@ -112,8 +112,9 @@ export class ProductViwConsole {
     let productCost = productSelected.Price;
     let Description = productSelected.Description;
     let ItemDenominationSelect: number;
+    let paymentstatus = false;
 
-    while (moneyEntered < productCost) {
+    while (!paymentstatus) {
       console.clear();
       moneyEntered > 0 ? console.log("Dinero Insuficiente") : " "
 
@@ -132,6 +133,7 @@ export class ProductViwConsole {
 
       if (ItemDenominationSelect > 0 && ItemDenominationSelect <= 7) {
         moneyEntered += Denominacion[ItemDenominationSelect - 1];
+        paymentstatus = this.productutils.validatePay(moneyEntered, productCost);
       } else {
         console.log("Seleccion invalida");
       }

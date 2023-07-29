@@ -32,7 +32,6 @@ export class ViewWeb {
         e.preventDefault();
         this.pago(product);
       })
-
     });
   }
 
@@ -40,11 +39,11 @@ export class ViewWeb {
     let container = document.getElementById("modal-body")
     let divcontainer = document.createElement("div");
     let delettediv = container?.querySelector("div");
-    if(delettediv != undefined){container?.removeChild(delettediv);}
-    container?.innerHTML!="";
-    divcontainer.classList.add('CardPay');
+    if (delettediv != undefined) { container?.removeChild(delettediv); }
+    container?.innerHTML != "";
+    divcontainer.classList.add('Card-Pay');
     divcontainer.innerHTML = `     
-        <img src="${product.imgUrl}" class="card-img-top" alt="Img Produc">
+        <img src="${product.imgUrl}" class="card-img-pay" alt="Img Produc">
         <div class="card-Pay-body">
           <h5 class="card-title">${product.Description}</h5>
           <p class="card-text">${product.Price}</p>
