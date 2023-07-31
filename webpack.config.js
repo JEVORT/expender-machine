@@ -8,11 +8,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist/web'),
     filename: 'main.js',
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      minify: true
-    })
-  ],
   mode: 'development',
   module: {
     rules: [
@@ -22,10 +17,6 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ]
-  },
-  devServer:{
-    port:3000,
-    open: true
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -37,5 +28,5 @@ module.exports = {
   resolve: {
     extensions: ['.ts']
   },
-  target: 'web'
+  target: 'node'
 }

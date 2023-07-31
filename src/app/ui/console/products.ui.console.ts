@@ -1,10 +1,10 @@
+import { EnumViewConsoleTicket, EnumViewConsoleValidate } from './../../common/constans/prints.console';
 import scanf from "scanf";
 import { ProductUtils } from "../../common/Utils/products.utils.view";
 import { product } from "../../domain/entities/entity";
 import { IDataBase } from "../../domain/interfaces/interface.repository";
-import { Decorator, menu, title } from "../../common/constans/prints.console";
+import { Decorator, EnumPrintsGeneral, menu } from "../../common/constans/prints.console";
 import { Denominacion } from "../../common/constans/denominations.money";
-
 
 export class ProductViwConsole {
 
@@ -17,17 +17,14 @@ export class ProductViwConsole {
   }
 
   menu() {
-    console.clear();
-
+    this.productutils.title();
     var scanf = require('scanf');
     let selector = 0;
     let selectValue: String;
     let validateError = false;
 
     while (selector != menu.length) {
-
-      console.clear();
-      title();
+      this.productutils.title();
       menu.forEach((menu, index) => {
         console.log(`*  ${index + 1} - ${this.productutils.validatespaces(menu)}        *`)
       })
@@ -61,11 +58,12 @@ export class ProductViwConsole {
     }
   }
 
+
   ViweList() {
     console.clear();
-    title();
-    console.log(" ")
-    console.log(" ******  LISTA DE PRODUCTOS  *********")
+    console.log(Decorator.TITLE);
+    console.log();
+    console.log(EnumViewConsoleTicket.PRODUCLIST);
     let productList = this.appServices.ReadAll();
 
     productList.forEach(product => console.log(`${Decorator.SIMGLE}
@@ -77,54 +75,27 @@ export class ProductViwConsole {
   ViweBuy(): void {
     console.clear();
     this.ViweList();
-    process.stdout.write("Seleccione el producto />: ")
+    process.stdout.write(Decorator.SELECTIONPRODUCT)
     let idProduct = scanf('%d');
-
     let productSelected = this.appServices.ReadById(idProduct);
 
     if (productSelected == undefined) {
-      console.log("No se encontro registro");
+      console.log(EnumPrintsGeneral.WITEHOUTREGISTRATION);
     } else {
-      let moneyEntered: number = 0;
-      let moneyReturned = 0;
-      let productCost = productSelected.Price;
-      let Description = productSelected.Description;
-
-      moneyReturned = this.validatePayment(productSelected);
-      moneyEntered = productCost + moneyReturned;
-      console.clear();
-
-      console.log("\n==============================================");
-      console.log("     Tiqket de compra ");
-      console.log("\nCliente: Generic Client");
-      console.log(`\nProducto       :  ${Description}`);
-
-      console.log(`Costo          :  ${this.productutils.formatter(productCost)}`);
-      console.log(`Valor Pagado   :  ${this.productutils.formatter(moneyEntered)}`);
-      console.log(`Cambio         :  ${this.productutils.formatter(moneyReturned)}`);
-      console.log("==============================================");
-      console.log(" ")
+      let moneyReturned = this.validatePayment(productSelected);
+      this.productutils.printTicket(productSelected, moneyReturned);
     }
   }
 
+
   validatePayment(productSelected: product): number {
     let moneyEntered: number = 0;
-    let productCost = productSelected.Price;
-    let Description = productSelected.Description;
     let ItemDenominationSelect: number;
     let paymentstatus = false;
 
     while (!paymentstatus) {
-      console.clear();
-      moneyEntered > 0 ? console.log("Dinero Insuficiente") : " "
-
-      console.log("=======================================")
-      console.log("-------Detalles del pedido ------------")
-      console.log(`Producto: ${Description}`)
-      console.log("--------------------------------------")
-      console.log(`costo: ${productCost}`)
-      console.log(`Dinero ingresado: ${this.productutils.formatter(moneyEntered)}`)
-      console.log("--------------------------------------")
+      moneyEntered > 0 ? console.log(EnumViewConsoleValidate.INSUFFICIENTMONEY) : " "
+      this.productutils.printValidate(productSelected, moneyEntered);
 
       Denominacion.forEach((billete, index) =>
         console.log(`${index + 1} : ${this.productutils.formatter(billete)}`));
@@ -133,13 +104,14 @@ export class ProductViwConsole {
 
       if (ItemDenominationSelect > 0 && ItemDenominationSelect <= 7) {
         moneyEntered += Denominacion[ItemDenominationSelect - 1];
-        paymentstatus = this.productutils.validatePay(moneyEntered, productCost);
+        paymentstatus = this.productutils.validatePay(moneyEntered, productSelected.Price);
       } else {
-        console.log("Seleccion invalida");
+        console.log(EnumViewConsoleValidate.INVALIDSELECTION);
       }
     }
-    return moneyEntered - productCost;
+    return moneyEntered - productSelected.Price;
   }
+
 
   exitAplication() {
     console.clear()

@@ -91,8 +91,3 @@ export function products() {
   return ProductsList;
 }
 
-/*
-var image = new Image();
-image.src = "picture.jpg";
-
-*/
