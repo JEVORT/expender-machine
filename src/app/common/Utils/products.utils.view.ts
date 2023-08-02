@@ -55,7 +55,7 @@ export class ProductUtils {
     console.log(Decorator.SIMGLE);
   }
 
-  
+
 
   title() {
     console.clear();
@@ -63,7 +63,7 @@ export class ProductUtils {
     console.log(Decorator.DOUBLE);
   }
 
-  errorInput(selector:number){
+  errorInput(selector: number) {
     return `${selector} ${Decorator.ERRORSELECTED}`;
   }
 }

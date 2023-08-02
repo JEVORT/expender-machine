@@ -32,7 +32,7 @@ export class ProductViwConsole {
       validateError ? console.log(`${selector} ${Decorator.ERRORSELECTED}`) : console;
       process.stdout.write("/>: ")
       selector = scanf('%d');
-      selector -=1;
+      selector -= 1;
       selectValue = menu[selector];
 
       this.launchSelectedOption(selectValue);
@@ -47,7 +47,7 @@ export class ProductViwConsole {
         break;
 
       case `${MenuConsole.BUY}`:
-        this.ViewList();
+        this.ViewBuy();
         this.productutils.proccesReturn();
         break;
 
