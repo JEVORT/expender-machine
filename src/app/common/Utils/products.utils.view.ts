@@ -1,4 +1,4 @@
-import { EnumViewConsoleTicket, Decorator, EnumViewConsoleValidate } from './../constans/prints.console';
+import { EnumViewConsoleTicket, Decorator, EnumViewConsoleValidate, menu, MenuConsole } from './../constans/prints.console';
 import scanf from "scanf";
 import { product } from "../../domain/entities/entity";
 
@@ -22,8 +22,7 @@ export class ProductUtils {
   }
 
   proccesReturn() {
-    console.log("Presione Enter para volver al menu principal")
-    process.stdout.write("/>: ")
+    process.stdout.write(Decorator.RETURNED)
     scanf("%s");
     console.clear();
   }
@@ -56,10 +55,15 @@ export class ProductUtils {
     console.log(Decorator.SIMGLE);
   }
 
+  
+
   title() {
     console.clear();
-    console.log(Decorator.DOUBLE);
     console.log(Decorator.TITLE);
     console.log(Decorator.DOUBLE);
+  }
+
+  errorInput(selector:number){
+    return `${selector} ${Decorator.ERRORSELECTED}`;
   }
 }

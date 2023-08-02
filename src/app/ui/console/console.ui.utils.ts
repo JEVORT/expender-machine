@@ -1,4 +1,4 @@
-import { EnumViewConsoleTicket, EnumViewConsoleValidate } from './../../common/constans/prints.console';
+import { EnumViewConsoleTicket, EnumViewConsoleValidate, MenuConsole } from '../../common/constans/prints.console';
 import scanf from "scanf";
 import { ProductUtils } from "../../common/Utils/products.utils.view";
 import { product } from "../../domain/entities/entity";
@@ -18,7 +18,6 @@ export class ProductViwConsole {
 
   menu() {
     this.productutils.title();
-    var scanf = require('scanf');
     let selector = 0;
     let selectValue: String;
     let validateError = false;
@@ -30,36 +29,38 @@ export class ProductViwConsole {
       })
 
       console.log(Decorator.DOUBLE);
-      validateError ? console.log(`${selector} No es una opcion valida`) : console;
+      validateError ? console.log(`${selector} ${Decorator.ERRORSELECTED}`) : console;
       process.stdout.write("/>: ")
       selector = scanf('%d');
+      selector -=1;
+      selectValue = menu[selector];
 
-      selectValue = menu[selector - 1]
-
-      switch (selectValue) {
-        case 'Listar':
-          this.ViweList();
-          this.productutils.proccesReturn();
-          break;
-
-        case 'Comprar':
-          this.ViweBuy();
-          this.productutils.proccesReturn();
-          break;
-
-        case 'Salir':
-          this.exitAplication();
-          break;
-
-        default:
-          validateError = true;
-          break;
-      }
+      this.launchSelectedOption(selectValue);
     }
   }
 
+  launchSelectedOption(selectValue: String) {
+    switch (selectValue) {
+      case `${MenuConsole.LIST}`:
+        this.ViewList();
+        this.productutils.proccesReturn();
+        break;
 
-  ViweList() {
+      case `${MenuConsole.BUY}`:
+        this.ViewList();
+        this.productutils.proccesReturn();
+        break;
+
+      case `${MenuConsole.EXIT}`:
+        this.exitAplication();
+        break;
+
+      default:
+        return true;
+    }
+  }
+
+  ViewList() {
     console.clear();
     console.log(Decorator.TITLE);
     console.log();
@@ -72,9 +73,9 @@ export class ProductViwConsole {
   }
 
 
-  ViweBuy(): void {
+  ViewBuy(): void {
     console.clear();
-    this.ViweList();
+    this.ViewList();
     process.stdout.write(Decorator.SELECTIONPRODUCT)
     let idProduct = scanf('%d');
     let productSelected = this.appServices.ReadById(idProduct);
@@ -116,7 +117,7 @@ export class ProductViwConsole {
   exitAplication() {
     console.clear()
     console.log(Decorator.DOUBLE);
-    console.log(" Gracias por usar nuestros servicios");
+    console.log(Decorator.THANKS);
     console.log(Decorator.DOUBLE);
     console.log();
   }

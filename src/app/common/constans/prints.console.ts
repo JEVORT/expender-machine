@@ -4,6 +4,12 @@ export const menu = [
   "Salir"
 ];
 
+export enum MenuConsole {
+  LIST ="Listar",
+  BUY ="Comprar",
+  EXIT ="Salir",
+}
+
 export enum Decorator {
   SIMGLE = "--------------------------------------",
   DOUBLE = "======================================",
@@ -11,7 +17,10 @@ export enum Decorator {
   SELECTIONPRODUCT = "Seleccione el producto />: ",
   TITLE = `
          MAQUINA EXPENDEDORA
-              Bienvenido`
+              Bienvenido`,
+  RETURNED = "Presione Enter para volver al menu principal />: ",
+  ERRORSELECTED = "No es una opcion valida",
+  THANKS = "Gracias por usar nuestros servicios"
 };
 
 export enum EnumViewConsoleTicket {
