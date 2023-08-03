@@ -1,6 +1,6 @@
 import { EnumViewConsoleTicket, EnumViewConsoleValidate, MenuConsole } from '../../common/constans/prints.console';
 import scanf from "scanf";
-import { ProductUtils } from "../../common/Utils/products.utils.view";
+import { ProductUtils } from "../../common/Utils/console.utils.view";
 import { product } from "../../domain/entities/entity";
 import { IDataBase } from "../../domain/interfaces/interface.repository";
 import { Decorator, EnumPrintsGeneral, menu } from "../../common/constans/prints.console";
@@ -72,7 +72,6 @@ export class ProductViwConsole {
     console.log()
   }
 
-
   ViewBuy(): void {
     console.clear();
     this.ViewList();
@@ -87,7 +86,6 @@ export class ProductViwConsole {
       this.productutils.printTicket(productSelected, moneyReturned);
     }
   }
-
 
   validatePayment(productSelected: product): number {
     let moneyEntered: number = 0;

@@ -1,4 +1,4 @@
-import { EnumViewConsoleTicket, Decorator, EnumViewConsoleValidate, menu, MenuConsole } from './../constans/prints.console';
+import { EnumViewConsoleTicket, Decorator, EnumViewConsoleValidate, menu, MenuConsole } from '../constans/prints.console';
 import scanf from "scanf";
 import { product } from "../../domain/entities/entity";
 

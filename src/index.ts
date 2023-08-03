@@ -1,6 +1,6 @@
 import { ProducServices } from "./app/services/produc.services";
 import { ProductViwConsole } from "./app/ui/console/console.ui";
-import { ProductUtils } from "./app/common/Utils/products.utils.view";
+import { ProductUtils } from "./app/common/Utils/console.utils.view";
 import { ViewWeb } from "./app/services/web.view.services";
 
 
