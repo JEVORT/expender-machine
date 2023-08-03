@@ -1,6 +1,6 @@
-import { products } from "../common/Utils/products.array.util";
-import { IDataBase } from "../domain/interfaces/interface.repository";
-import { product } from "../domain/entities/entity";
+import { products } from "../../common/Utils/products.array.util";
+import { IDataBase } from "../../domain/interfaces/interface.repository";
+import { product } from "../../domain/entities/entity";
 
 
 export class ProducServices implements IDataBase<product> {

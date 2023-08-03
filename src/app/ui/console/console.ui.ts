@@ -32,10 +32,9 @@ export class ProductViwConsole {
       validateError ? console.log(`${selector} ${Decorator.ERRORSELECTED}`) : console;
       process.stdout.write("/>: ")
       selector = scanf('%d');
-      selector -= 1;
-      selectValue = menu[selector];
+      selectValue = menu[selector -1];
 
-      this.launchSelectedOption(selectValue);
+      validateError = this.launchSelectedOption(selectValue);
     }
   }
 
@@ -44,18 +43,19 @@ export class ProductViwConsole {
       case `${MenuConsole.LIST}`:
         this.ViewList();
         this.productutils.proccesReturn();
-        break;
+        return false;
 
       case `${MenuConsole.BUY}`:
         this.ViewBuy();
         this.productutils.proccesReturn();
-        break;
+        return false;
 
       case `${MenuConsole.EXIT}`:
         this.exitAplication();
-        break;
+        return false;
 
       default:
+        console.log("error");
         return true;
     }
   }
@@ -67,9 +67,15 @@ export class ProductViwConsole {
     console.log(EnumViewConsoleTicket.PRODUCLIST);
     let productList = this.appServices.ReadAll();
 
-    productList.forEach(product => console.log(`${Decorator.SIMGLE}
-    ${product.id} : ${this.productutils.validatespaces(product.Description)} ${this.productutils.formatter(product.Price)}`))
+    productList.forEach(product => this.listProducValid(product))
     console.log()
+  }
+
+  listProducValid(product:product){
+    if(product.Stock > 0){
+      console.log(`${Decorator.SIMGLE}
+    ${product.id} : ${this.productutils.validatespaces(product.Description)} ${this.productutils.formatter(product.Price)}`)
+    }
   }
 
   ViewBuy(): void {

@@ -1,6 +1,6 @@
-import { product } from './../domain/entities/entity';
-import { IDataBase } from "../domain/interfaces/interface.repository";
-import { Denominacion } from '../common/constans/denominations.money';
+import { product } from '../../domain/entities/entity';
+import { IDataBase } from "../../domain/interfaces/interface.repository";
+import { Denominacion } from '../../common/constans/denominations.money';
 
 export class ViewWeb {
 

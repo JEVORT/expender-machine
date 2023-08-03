@@ -83,7 +83,7 @@ export function products() {
     {
       id: 12,
       Description: "Rosquitas Queso",
-      Stock: 10,
+      Stock: 2,
       Price: 1200,
       imgUrl: 'https://www.servipan.com.co/wp-content/uploads/2020/11/018-1-1024x1024.jpg'
     }
