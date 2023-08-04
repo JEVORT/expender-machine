@@ -6,8 +6,7 @@
   "scripts": {
     "start:console": "tsc && node dist/console/index.js",
     "start:web": "webpack && live-server ./dist/web",
-    "dev": "webpack",
-    "devc": "webpack node dist/console/index.js"
+    "dev": "webpack"
   },
   "author": "Juan Elias Vergara <jevort@gmail.com>",
   "license": "ISC",
