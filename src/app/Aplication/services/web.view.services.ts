@@ -56,20 +56,38 @@ export class ViewWeb {
           </div>
         </div>`
     container?.appendChild(divcontainer);
-    this.denomynationPay();
+    this.denomynationPay(product.Price);
   }
-  denomynationPay(){
+
+  denomynationPay(price:number){
     let divMoneyContent = document.getElementById("divMoneyContent");
-    Denominacion.forEach((ticket) => {
+    this.btnPayEnabled(false)
+    Denominacion.forEach((currency) => {
       let divMoneyItem = document.createElement("div");
-      divMoneyItem.setAttribute("id",`${ticket}`);
+      divMoneyItem.setAttribute("id",`${currency}`);
+      divMoneyItem.addEventListener("click", ()=>{this.validateMoneyEntered(currency,price)})
       divMoneyItem.classList.add("divMoneyItem");
       divMoneyItem.innerHTML= `
-      <p>${ticket}</p>
+      ${currency}
       `;
       divMoneyContent?.appendChild(divMoneyItem);
     });
+    const btnClouse = document.querySelector("#btnCancel");
+    btnClouse?.addEventListener("click", ()=>{})
   };
+
+  validateMoneyEntered(currency:number, price:number){
+    let moneyEntered
+    
+  }
+  pay(){
+
+  }
+
+  btnPayEnabled(state:boolean){
+    let btnPay:HTMLButtonElement;
+    (btnPay = document.querySelector("#btnPay") as HTMLButtonElement).disabled = !state;
+  }
 
 }
 

@@ -3,7 +3,7 @@ import scanf from "scanf";
 import { product } from "../../domain/entities/entity";
 
 export class ProductUtils {
-
+  
   formatter(number: number): string {
     const formatter = new Intl.NumberFormat('es-CO', {
       style: 'currency',

@@ -69,8 +69,18 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 30px;
     width: 90px;
-    background-color: rgba(7, 23, 255, 0.856);
-    color: rgb(245, 245, 245);
+    background-color: rgb(192, 191, 191);
+    color: rgb(128, 128, 128);
     border-radius: 20px;
+    border: solid 2px rgba(43, 43, 43, 0.918); 
+}
+
+.divMoneyItem:hover{
+    cursor: pointer;
+    background-color: rgb(221, 221, 221);
+    color: rgb(107, 107, 107);
+    border-radius: 20px;
+    border: solid 2px rgba(29, 29, 29, 0.918);
 }
