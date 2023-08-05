@@ -39,7 +39,7 @@ export class ViewWeb {
 
   payProduct(product: product) {
     let modtitle = document.getElementById("ModaTitle");
-    modtitle!.innerHTML=`${product.Description}`;
+    modtitle!.innerHTML = `${product.Description}`;
     let container = document.getElementById("modal-body");
     let divcontainer = document.createElement("div");
     let delettediv = container?.querySelector("div");
@@ -59,33 +59,39 @@ export class ViewWeb {
     this.denomynationPay(product.Price);
   }
 
-  denomynationPay(price:number){
+  denomynationPay(price: number) {
     let divMoneyContent = document.getElementById("divMoneyContent");
     this.btnPayEnabled(false)
     Denominacion.forEach((currency) => {
       let divMoneyItem = document.createElement("div");
-      divMoneyItem.setAttribute("id",`${currency}`);
-      divMoneyItem.addEventListener("click", ()=>{this.validateMoneyEntered(currency,price)})
+      divMoneyItem.setAttribute("id", `${currency}`);
+      divMoneyItem.addEventListener("click", () => { this.validateMoneyEntered(currency, price) })
       divMoneyItem.classList.add("divMoneyItem");
-      divMoneyItem.innerHTML= `
+      divMoneyItem.innerHTML = `
       ${currency}
       `;
       divMoneyContent?.appendChild(divMoneyItem);
     });
     const btnClouse = document.querySelector("#btnCancel");
-    btnClouse?.addEventListener("click", ()=>{})
+    btnClouse?.addEventListener("click", () => { })
   };
 
-  validateMoneyEntered(currency:number, price:number){
-    let moneyEntered
-    
-  }
-  pay(){
+  validateMoneyEntered(currency: number, price: number) {
+    if (currency >= price) {
+      this.btnPayEnabled(true);
+      let btnPay: HTMLButtonElement;
+      (btnPay = document.querySelector("#btnPay") as HTMLButtonElement);
+      btnPay.setAttribute("data-dismiss", "modal")
+      btnPay.addEventListener("click",()=>{this.pay()})
+    }
 
   }
+  pay() {
+   
+  }
 
-  btnPayEnabled(state:boolean){
-    let btnPay:HTMLButtonElement;
+  btnPayEnabled(state: boolean) {
+    let btnPay: HTMLButtonElement;
     (btnPay = document.querySelector("#btnPay") as HTMLButtonElement).disabled = !state;
   }
 
