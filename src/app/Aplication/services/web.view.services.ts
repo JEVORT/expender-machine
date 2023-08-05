@@ -32,12 +32,12 @@ export class ViewWeb {
       let btnPay = document.getElementById(`${product.id}`)
       btnPay!.addEventListener('click', (e) => {
         e.preventDefault();
-        this.payProduct(product);
+        this.modalPayProduct(product);
       })
     });
   }
 
-  payProduct(product: product) {
+  modalPayProduct(product: product) {
     let modtitle = document.getElementById("ModaTitle");
     modtitle!.innerHTML = `${product.Description}`;
     let container = document.getElementById("modal-body");
@@ -56,16 +56,16 @@ export class ViewWeb {
           </div>
         </div>`
     container?.appendChild(divcontainer);
-    this.denomynationPay(product.Price);
+    this.denomynationPay(product);
   }
 
-  denomynationPay(price: number) {
+  denomynationPay(product: product) {
     let divMoneyContent = document.getElementById("divMoneyContent");
     this.btnPayEnabled(false)
     Denominacion.forEach((currency) => {
       let divMoneyItem = document.createElement("div");
       divMoneyItem.setAttribute("id", `${currency}`);
-      divMoneyItem.addEventListener("click", () => { this.validateMoneyEntered(currency, price) })
+      divMoneyItem.addEventListener("click", () => { this.validateMoneyEntered(currency, product.Price,product.id) })
       divMoneyItem.classList.add("divMoneyItem");
       divMoneyItem.innerHTML = `
       ${currency}
@@ -76,24 +76,25 @@ export class ViewWeb {
     btnClouse?.addEventListener("click", () => { })
   };
 
-  validateMoneyEntered(currency: number, price: number) {
+  validateMoneyEntered(currency: number, price: number,idProduct:number) {
     if (currency >= price) {
       this.btnPayEnabled(true);
       let btnPay: HTMLButtonElement;
       (btnPay = document.querySelector("#btnPay") as HTMLButtonElement);
+      btnPay.removeAttribute("data-dismiss");
       btnPay.setAttribute("data-dismiss", "modal")
-      btnPay.addEventListener("click",()=>{this.pay()})
+      btnPay.addEventListener("click", () => { this.pay(idProduct) })
     }
 
   }
-  pay() {
-   
+  pay(idProduct:number) {
+    this.producservices.Update(idProduct);
+    alert("Producto pagado satisfactoriamente");
   }
 
   btnPayEnabled(state: boolean) {
     let btnPay: HTMLButtonElement;
     (btnPay = document.querySelector("#btnPay") as HTMLButtonElement).disabled = !state;
   }
-
 }
 

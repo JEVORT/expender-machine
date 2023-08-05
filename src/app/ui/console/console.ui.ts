@@ -89,6 +89,7 @@ export class ProductViwConsole {
       console.log(EnumPrintsGeneral.WITEHOUTREGISTRATION);
     } else {
       let moneyReturned = this.validatePayment(productSelected);
+      this.appServices.Update(productSelected.id);
       this.productutils.printTicket(productSelected, moneyReturned);
     }
   }
@@ -102,8 +103,8 @@ export class ProductViwConsole {
       moneyEntered > 0 ? console.log(EnumViewConsoleValidate.INSUFFICIENTMONEY) : " "
       this.productutils.printValidate(productSelected, moneyEntered);
 
-      Denominacion.forEach((billete, index) =>
-        console.log(`${index + 1} : ${this.productutils.formatter(billete)}`));
+      Denominacion.forEach((money, index) =>
+        console.log(`${index + 1} : ${this.productutils.formatter(money)}`));
 
       ItemDenominationSelect = scanf('%d');
 
