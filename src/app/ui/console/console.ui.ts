@@ -32,7 +32,7 @@ export class ProductViwConsole {
       validateError ? console.log(`${selector} ${Decorator.ERRORSELECTED}`) : console;
       process.stdout.write("/>: ")
       selector = scanf('%d');
-      selectValue = menu[selector -1];
+      selectValue = menu[selector - 1];
 
       validateError = this.launchSelectedOption(selectValue);
     }
@@ -71,8 +71,8 @@ export class ProductViwConsole {
     console.log()
   }
 
-  listProducValid(product:product){
-    if(product.Stock > 0){
+  listProducValid(product: product) {
+    if (product.Stock > 0) {
       console.log(`${Decorator.SIMGLE}
     ${product.id} : ${this.productutils.validatespaces(product.Description)} ${this.productutils.formatter(product.Price)}`)
     }
@@ -85,7 +85,7 @@ export class ProductViwConsole {
     let idProduct = scanf('%d');
     let productSelected = this.appServices.ReadById(idProduct);
 
-    if (productSelected == undefined) {
+    if (productSelected == undefined || productSelected.Stock <= 0) {
       console.log(EnumPrintsGeneral.WITEHOUTREGISTRATION);
     } else {
       let moneyReturned = this.validatePayment(productSelected);
