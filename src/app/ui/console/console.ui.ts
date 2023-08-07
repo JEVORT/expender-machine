@@ -55,7 +55,7 @@ export class ProductViwConsole {
         return false;
 
       default:
-        console.log("error");
+        console.log(Decorator.ERRORSELECTED);
         return true;
     }
   }

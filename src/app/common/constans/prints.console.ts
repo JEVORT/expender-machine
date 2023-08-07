@@ -20,7 +20,7 @@ export enum Decorator {
               Bienvenido`,
   RETURNED = "Presione Enter para volver al menu principal />: ",
   ERRORSELECTED = "No es una opcion valida",
-  THANKS = "Gracias por usar nuestros servicios"
+  THANKS = "Gracias por usar nuestros servicios",
 };
 
 export enum EnumViewConsoleTicket {
