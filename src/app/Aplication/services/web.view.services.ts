@@ -63,20 +63,20 @@ export class ViewWeb {
     let divMoneyContent = document.getElementById("divMoneyContent");
     this.btnPayEnabled(false)
     Denominacion.forEach((currency) => {
-      let divMoneyItem = document.createElement("div");
-      divMoneyItem.setAttribute("id", `${currency}`);
-      divMoneyItem.addEventListener("click", () => { this.validateMoneyEntered(currency, product.Price,product.id) })
-      divMoneyItem.classList.add("divMoneyItem");
-      divMoneyItem.innerHTML = `
+      let btnMoneyItem = document.createElement("button");
+      btnMoneyItem.setAttribute("id", `${currency}`);
+      btnMoneyItem.addEventListener("click", () => { this.validateMoneyEntered(currency, product.Price, product.id) })
+      btnMoneyItem.classList.add("divMoneyItem");
+      btnMoneyItem.innerHTML = `
       ${currency}
       `;
-      divMoneyContent?.appendChild(divMoneyItem);
+      divMoneyContent?.appendChild(btnMoneyItem);
     });
     const btnClouse = document.querySelector("#btnCancel");
     btnClouse?.addEventListener("click", () => { })
   };
 
-  validateMoneyEntered(currency: number, price: number,idProduct:number) {
+  validateMoneyEntered(currency: number, price: number, idProduct: number) {
     if (currency >= price) {
       this.btnPayEnabled(true);
       let btnPay: HTMLButtonElement;
@@ -87,7 +87,7 @@ export class ViewWeb {
     }
 
   }
-  pay(idProduct:number) {
+  pay(idProduct: number) {
     this.producservices.Update(idProduct);
     alert("Producto pagado satisfactoriamente");
   }

@@ -64,6 +64,6 @@ export class ProductUtils {
   }
 
   errorInput(selector: number) {
-    return `${selector} ${Decorator.ERRORSELECTED}`;
+    return `${selector} ${Decorator.ERROR_SELECTED}`;
   }
 }

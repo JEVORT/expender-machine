@@ -29,7 +29,7 @@ export class ProductViwConsole {
       })
 
       console.log(Decorator.DOUBLE);
-      validateError ? console.log(`${selector} ${Decorator.ERRORSELECTED}`) : console;
+      validateError ? console.log(`${selector} ${Decorator.ERROR_SELECTED}`) : console;
       process.stdout.write("/>: ")
       selector = scanf('%d');
       selectValue = menu[selector - 1];
@@ -40,22 +40,22 @@ export class ProductViwConsole {
 
   launchSelectedOption(selectValue: String) {
     switch (selectValue) {
-      case `${MenuConsole.LIST}`:
+      case MenuConsole.LIST:
         this.ViewList();
         this.productutils.proccesReturn();
         return false;
 
-      case `${MenuConsole.BUY}`:
+      case MenuConsole.BUY:
         this.ViewBuy();
         this.productutils.proccesReturn();
         return false;
 
-      case `${MenuConsole.EXIT}`:
+      case MenuConsole.EXIT:
         this.exitAplication();
         return false;
 
       default:
-        console.log(Decorator.ERRORSELECTED);
+        console.log(Decorator.ERROR_SELECTED);
         return true;
     }
   }
@@ -71,7 +71,7 @@ export class ProductViwConsole {
     console.log()
   }
 
-  listProducValid(product: product) {
+  private listProducValid(product: product) {
     if (product.Stock > 0) {
       console.log(`${Decorator.SIMGLE}
     ${product.id} : ${this.productutils.validatespaces(product.Description)} ${this.productutils.formatter(product.Price)}`)

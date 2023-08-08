@@ -19,7 +19,7 @@ export enum Decorator {
          MAQUINA EXPENDEDORA
               Bienvenido`,
   RETURNED = "Presione Enter para volver al menu principal />: ",
-  ERRORSELECTED = "No es una opcion valida",
+  ERROR_SELECTED = "No es una opcion valida",
   THANKS = "Gracias por usar nuestros servicios",
 };
 
