@@ -1,34 +1,27 @@
 import { product } from '../../domain/entities/entity';
 import { IDataBase } from "../../domain/interfaces/interface.repository";
 import { Denominacion } from '../../common/constans/denominations.money';
+import { WebUtils } from '../../common/Utils/web.utils';
 
 export class ViewWeb {
 
   private producservices: IDataBase<product>;
+  private utils : WebUtils;
 
-  constructor(producservices: IDataBase<product>) {
+  constructor(producservices: IDataBase<product>, util:WebUtils) {
     this.producservices = producservices;
+    this.utils = util;
   }
 
-  FlexContent() {
+  CardContent() {
     let container = document.getElementById("Card-containerFlex")
     let products = this.producservices.ReadAll();
 
     products.forEach(product => {
-      let divcontainer = document.createElement("div");
-      divcontainer.classList.add('Card');
-      divcontainer.innerHTML = `     
-      <div class="card">
-        <img src="${product.imgUrl}" class="card-img-top" alt="Img Produc">
-        <div class="card-body">
-          <h5 class="card-title">${product.Description}</h5>
-          <p class="card-text">${product.Price}</p>
-          <button id="${product.id}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPay">
-            Comprar
-          </button>
-        </div>
-      </div>`
-      container?.appendChild(divcontainer);
+      let divcard = document.createElement("div");
+      divcard.classList.add('card');
+      divcard.innerHTML = this.utils.CardView(product);
+      container?.appendChild(divcard);
       let btnPay = document.getElementById(`${product.id}`)
       btnPay!.addEventListener('click', (e) => {
         e.preventDefault();
@@ -36,8 +29,7 @@ export class ViewWeb {
       })
     });
   }
-
-  
+    
   modalPayProduct(product: product) {
     let modtitle = document.getElementById("ModaTitle");
     modtitle!.innerHTML = `${product.Description}`;
@@ -45,17 +37,8 @@ export class ViewWeb {
     let divcontainer = document.createElement("div");
     let delettediv = container?.querySelector("div");
     if (delettediv != undefined) { container?.removeChild(delettediv); }
-    container?.innerHTML != "";
     divcontainer.classList.add('Card-Pay');
-    divcontainer.innerHTML = `     
-        <img src="${product.imgUrl}" class="card-img-pay" alt="Img Produc">
-        <div class="card-Pay-body">
-          <h5 class="card-title">${product.Description}</h5>
-          <p class="card-text">${product.Price}</p>
-          <div id="divMoneyContent" class="divMoneyContent">
-
-          </div>
-        </div>`
+    divcontainer.innerHTML = this.utils.ModalView(product);
     container?.appendChild(divcontainer);
     this.denomynationPay(product);
   }
@@ -69,8 +52,7 @@ export class ViewWeb {
       btnMoneyItem.addEventListener("click", () => { this.validateMoneyEntered(currency, product.Price, product.id) })
       btnMoneyItem.classList.add("divMoneyItem");
       btnMoneyItem.innerHTML = `
-      ${currency}
-      `;
+      ${currency}`;
       divMoneyContent?.appendChild(btnMoneyItem);
     });
     const btnClouse = document.querySelector("#btnCancel");
@@ -83,10 +65,10 @@ export class ViewWeb {
       let btnPay: HTMLButtonElement;
       (btnPay = document.querySelector("#btnPay") as HTMLButtonElement);
       btnPay.removeAttribute("data-dismiss");
-      btnPay.setAttribute("data-dismiss", "modal")
+      btnPay.setAttribute("data-dismiss", "modal");
+      btnPay.removeEventListener("click", () => { this.pay(idProduct) })
       btnPay.addEventListener("click", () => { this.pay(idProduct) })
     }
-
   }
   pay(idProduct: number) {
     this.producservices.Update(idProduct);
@@ -96,35 +78,6 @@ export class ViewWeb {
   btnPayEnabled(state: boolean) {
     let btnPay: HTMLButtonElement;
     (btnPay = document.querySelector("#btnPay") as HTMLButtonElement).disabled = !state;
-  }
-
-  FlexContent2() {
-    let container = document.getElementById("Card-containerFlex")
-    let products = this.producservices.ReadAll();
-
-    products.forEach(product => {
-      let divcard = document.createElement("div");
-      divcard.classList.add('card');
-      divcard.innerHTML = `     
-      <div class="card-img">
-        <img src="${product.imgUrl}" class="card-img-top" alt="Img Produc">
-      </div>
-      <div class="card-body">
-      <h5 class="card-title">${product.Description}</h5>
-        <p class="card-text">${product.Price}</p>
-      </div>
-      <div class="card-actions">
-        <button id="${product.id}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPay">
-        Comprar
-        </button>
-      </div>`
-      container?.appendChild(divcard);
-      let btnPay = document.getElementById(`${product.id}`)
-      btnPay!.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.modalPayProduct(product);
-      })
-    });
   }
 }
 
