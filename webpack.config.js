@@ -28,5 +28,13 @@ module.exports = {
   resolve: {
     extensions: ['.ts']
   },
-  target: 'web'
+  devServer: {
+        static: {
+            directory: path.join(__dirname, './')
+        },
+        port: 3000,
+        open: true,
+        hot: true
+    },
+  target: 'node'
 }

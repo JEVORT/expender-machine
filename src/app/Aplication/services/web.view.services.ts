@@ -37,6 +37,7 @@ export class ViewWeb {
     });
   }
 
+  
   modalPayProduct(product: product) {
     let modtitle = document.getElementById("ModaTitle");
     modtitle!.innerHTML = `${product.Description}`;
@@ -95,6 +96,35 @@ export class ViewWeb {
   btnPayEnabled(state: boolean) {
     let btnPay: HTMLButtonElement;
     (btnPay = document.querySelector("#btnPay") as HTMLButtonElement).disabled = !state;
+  }
+
+  FlexContent2() {
+    let container = document.getElementById("Card-containerFlex")
+    let products = this.producservices.ReadAll();
+
+    products.forEach(product => {
+      let divcard = document.createElement("div");
+      divcard.classList.add('card');
+      divcard.innerHTML = `     
+      <div class="card-img">
+        <img src="${product.imgUrl}" class="card-img-top" alt="Img Produc">
+      </div>
+      <div class="card-body">
+      <h5 class="card-title">${product.Description}</h5>
+        <p class="card-text">${product.Price}</p>
+      </div>
+      <div class="card-actions">
+        <button id="${product.id}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPay">
+        Comprar
+        </button>
+      </div>`
+      container?.appendChild(divcard);
+      let btnPay = document.getElementById(`${product.id}`)
+      btnPay!.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.modalPayProduct(product);
+      })
+    });
   }
 }
 

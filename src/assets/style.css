@@ -47,6 +47,21 @@ body {
     align-items: center;
 }
 
+.card-img {
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    overflow: hidden; 
+}
+
+.card-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
 .Card-Pay {
     display: flex;
     flex-direction: row;
